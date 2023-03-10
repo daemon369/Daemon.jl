@@ -1,6 +1,6 @@
 
-global verbose::Bool = false
-global quiet::Bool = false
+global verbose = false
+global quiet = false
 
 function setVerbose(v::Bool)
     global verbose = v
