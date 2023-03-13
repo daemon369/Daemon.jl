@@ -1,6 +1,7 @@
 
 global verbose = false
 global quiet = false
+global showPrefix = true
 
 function setVerbose(v::Bool)
     global verbose = v
@@ -8,6 +9,10 @@ end
 
 function setQuiet(q::Bool)
     global quiet = q
+end
+
+function setShowPrefix(s::Bool)
+    global showPrefix = s
 end
 
 function p(io::IO, prefix::AbstractString, xs...)
@@ -30,7 +35,7 @@ end
 # show verbose log
 function v(io::IO, xs...)
     if verbose && !quiet
-        p(io, "[V] ", xs...)
+        p(io, showPrefix ? "[V] " : "", xs...)
     end
 end
 
@@ -41,7 +46,7 @@ end
 # show info log
 function i(io::IO, xs...)
     if !quiet
-        p(io, "[I] ", xs...)
+        p(io, showPrefix ? "[I] " : "", xs...)
     end
 end
 
@@ -52,7 +57,7 @@ end
 # show warning log
 function w(io::IO, xs...)
     if !quiet
-        p(io, "[W] ", xs...)
+        p(io, showPrefix ? "[W] " : "", xs...)
     end
 end
 
@@ -62,7 +67,7 @@ end
 
 # show error log
 function e(io::IO, xs...)
-    p(io, "[E] ", xs...)
+    p(io, showPrefix ? "[E] " : "", xs...)
 end
 
 function e(xs...)
