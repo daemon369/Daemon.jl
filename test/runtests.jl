@@ -12,4 +12,6 @@ using Test
     Daemon.setShowPrefix(false)
     @test Daemon.showPrefix == false
     Daemon.v("verbose info")
+    Daemon.setQuiet(true)
+    @test Daemon.quiet == true
 end
