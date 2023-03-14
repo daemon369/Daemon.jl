@@ -1,7 +1,7 @@
 name = "Daemon"
 uuid = "c3aee05f-4a6b-4834-aae0-ff1a2f3fd2c6"
 authors = ["daemon369"]
-version = "1.0.0"
+version = "1.0.3"
 
 [deps]
 ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
