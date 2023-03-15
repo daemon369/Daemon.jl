@@ -1,6 +1,5 @@
 module Daemon
 
-export isdefined
 export timestamp
 export v, i, w, e, p, verbose, quiet, setVerbose, setQuiet, setShowPrefix
 export unzip
