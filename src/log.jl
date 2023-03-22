@@ -11,7 +11,7 @@ global showPrefix = true
     ERROR
 end
 
-logLevel::LogLevel = INFO
+logLevel = INFO
 
 function setVerbose(v::Bool)
     global verbose = v
