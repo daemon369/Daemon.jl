@@ -3,6 +3,16 @@ global verbose = false
 global quiet = false
 global showPrefix = true
 
+@enum LogLevel begin
+    VERBOSE
+    DEBUG
+    INFO
+    WARNING
+    ERROR
+end
+
+logLevel::LogLevel = INFO
+
 function setVerbose(v::Bool)
     global verbose = v
 end
@@ -13,6 +23,14 @@ end
 
 function setShowPrefix(s::Bool)
     global showPrefix = s
+end
+
+function getLogLevel()::LogLevel
+    return logLevel
+end
+
+function setLogLevel(level::LogLevel)
+    logLevel = level
 end
 
 function p(io::IO, prefix::AbstractString, xs...)
