@@ -1,6 +1,4 @@
 
-global verbose = false
-global quiet = false
 global showPrefix = true
 
 @enum LogLevel begin
@@ -9,16 +7,17 @@ global showPrefix = true
     INFO
     WARNING
     ERROR
+    QUIET
 end
 
 logLevel = INFO
 
 function setVerbose(v::Bool)
-    global verbose = v
+    global logLevel = VERBOSE
 end
 
 function setQuiet(q::Bool)
-    global quiet = q
+    global logLevel = QUIET
 end
 
 function setShowPrefix(s::Bool)
@@ -30,7 +29,7 @@ function getLogLevel()::LogLevel
 end
 
 function setLogLevel(level::LogLevel)
-    logLevel = level
+    global logLevel = level
 end
 
 function p(io::IO, prefix::AbstractString, xs...)
@@ -52,7 +51,7 @@ end
 
 # show verbose log
 function v(io::IO, xs...)
-    if verbose && !quiet
+    if logLevel == VERBOSE
         p(io, showPrefix ? "[V] " : "", xs...)
     end
 end
@@ -61,9 +60,20 @@ function v(xs...)
     v(stdout, xs...)
 end
 
+# show verbose log
+function d(io::IO, xs...)
+    if logLevel <= DEBUG
+        p(io, showPrefix ? "[V] " : "", xs...)
+    end
+end
+
+function d(xs...)
+    d(stdout, xs...)
+end
+
 # show info log
 function i(io::IO, xs...)
-    if !quiet
+    if logLevel <= INFO
         p(io, showPrefix ? "[I] " : "", xs...)
     end
 end
@@ -74,20 +84,22 @@ end
 
 # show warning log
 function w(io::IO, xs...)
-    if !quiet
+    if logLevel <= WARNING
         p(io, showPrefix ? "[W] " : "", xs...)
     end
 end
 
 function w(xs...)
-    i(stdout, xs...)
+    w(stdout, xs...)
 end
 
 # show error log
 function e(io::IO, xs...)
-    p(io, showPrefix ? "[E] " : "", xs...)
+    if logLevel <= ERROR
+        p(io, showPrefix ? "[E] " : "", xs...)
+    end
 end
 
 function e(xs...)
-    i(stdout, xs...)
+    e(stdout, xs...)
 end
