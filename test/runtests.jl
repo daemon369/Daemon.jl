@@ -14,14 +14,6 @@ using Test
     println()
 
     println("verbose")
-    Daemon.setVerbose(true)
-    @test Daemon.logLevel == Daemon.VERBOSE
-    Daemon.v("verbose log")
-    Daemon.d("debug log")
-    Daemon.i("info log")
-    Daemon.w("warning log")
-    Daemon.e("error log")
-    println()
     Daemon.setLogLevel(VERBOSE)
     @test Daemon.logLevel == VERBOSE
     Daemon.v("verbose log 2")
