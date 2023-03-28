@@ -13,11 +13,19 @@ end
 logLevel = INFO
 
 function setVerbose(v::Bool)
-    global logLevel = VERBOSE
+    if v
+        global logLevel = VERBOSE
+    elseif logLevel == VERBOSE
+        global logLevel = DEBUG
+    end
 end
 
 function setQuiet(q::Bool)
-    global logLevel = QUIET
+    if q
+        global logLevel = QUIET
+    elseif logLevel == QUIET
+        global logLevel = ERROR
+    end
 end
 
 function setShowPrefix(s::Bool)
