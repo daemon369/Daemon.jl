@@ -1,7 +1,7 @@
 module Daemon
 
 export timestamp
-export v, d, i, w, e, p, setVerbose, setQuiet, setShowPrefix, logLevel, setLogLevel, getLogLevel, VERBOSE, DEBUG, INFO, WARNING, ERROR, QUIET
+export v, d, i, w, e, p, setShowPrefix, logLevel, setLogLevel, getLogLevel, VERBOSE, DEBUG, INFO, WARNING, ERROR, QUIET
 export unzip
 export checkAdb, selectSerial
 
