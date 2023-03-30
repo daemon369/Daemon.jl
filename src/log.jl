@@ -55,7 +55,7 @@ end
 # show verbose log
 function d(io::IO, xs...)
     if logLevel <= DEBUG
-        p(io, showPrefix ? "[V] " : "", xs...)
+        p(io, showPrefix ? "[D] " : "", xs...)
     end
 end
 
