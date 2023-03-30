@@ -14,10 +14,16 @@ end
 function checkAdb()
     local adb = Sys.which("adb")
     if isempty(adb)
-        throw(InvalidStateException("adb not found", :adb))
+        throw(ErrorException("adb not found"))
     end
 end
 
+#=
+selectSerial
+If multi-devices exists, let user choose one and return it's serial;
+if only one device exists, choose that one and return it's serial;
+if no device exists, throw ErrorException
+=#
 function selectSerial()::String
     checkAdb()
     local adbDevices::String = readchomp(`adb devices`)
@@ -37,7 +43,7 @@ function selectSerial()::String
 
     v("devices=$devices")
     if length(devices) == 0
-        throw(InvalidStateException("android device not found", :adb))
+        throw(ErrorException("android device not found"))
     elseif length(devices) == 1
         return devices[1].serial
     else
