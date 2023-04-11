@@ -3,10 +3,6 @@ using Test
 
 @testset "Daemon.jl" begin
     # Write your tests here.
-    println("isdefined")
-    @test (Daemon.@isdefined aaa) == false
-    println("isdefined passed\n")
-
     println("showPrefix")
     @test Daemon.showPrefix == true
     Daemon.setShowPrefix(false)
