@@ -14,6 +14,11 @@ Function | Description
 --- | ---
 checkAdb | check whether adb tools exists, throw exception if not
 selectSerial | if only on android device exists, return it; if multi-devices found, ask user to select one
+getProp | Get android prop by propKey
+showProp | Print android props
+setProp | Set android prop to new value
+resetProp | Reset android prop to empty
+resetProps | Reset android props to empty
 
 ## common.jl
 
@@ -25,13 +30,19 @@ timestamp | get current timestamp in millseconds
 
 Log tools
 
+Struct/Variable | Description
+--- | ---
+LogLevel | VERBOSE, DEBUG, INFO, WARNING, ERROR, QUIET
+logLevel | LogLevel instance, presist global log level
+
 Function | Description
 --- | ---
-setVerbose | open/close verbose log
-setQuiet | enable/disable quiet
 setShowPrefix | enable/disable show prefix
+getLogLevel | get current log level
+setLogLevel | set current log level
 p | print log
 v | print verbose log
+d | print debug log
 i | print info log
 w | print warning log
 e | print error log
