@@ -6,7 +6,7 @@ export unzip
 export checkAdb, selectSerial, getProp, showProp, setProp, resetProp, resetProps
 
 include("macro.jl")
-include("common.jl")
+include("timestamp.jl")
 include("log.jl")
 include("zip.jl")
 include("android.jl")
