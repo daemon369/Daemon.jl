@@ -20,7 +20,7 @@ setProp | Set android prop to new value
 resetProp | Reset android prop to empty
 resetProps | Reset android props to empty
 
-## common.jl
+## timestamp.jl
 
 Function | Description
 --- | ---
