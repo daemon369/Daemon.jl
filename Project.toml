@@ -4,11 +4,9 @@ authors = ["daemon369"]
 version = "1.1.7"
 
 [deps]
-DocumenterTools = "35a29f4d-8980-5a13-9543-d66fff28ecb8"
 ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 
 [compat]
-DocumenterTools = "0.1"
 ZipFile = "0.10"
 julia = "1"
 
