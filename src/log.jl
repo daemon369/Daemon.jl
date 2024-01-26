@@ -1,3 +1,4 @@
+using Printf
 
 global showPrefix = true
 global showPid = true
@@ -70,19 +71,38 @@ function p(prefix::AbstractString, xs...)
 end
 
 function l(io::IO, prefix::AbstractString, xs...)
-    local logPrefix = ""
+    local ss = split(join(xs), "\n")
     if showPrefix
-        if showPid
-            logPrefix = logPrefix * string(getpid()) * "\t"
-        end
-        if showTid
-            logPrefix = logPrefix * string(Threads.threadid()) * "\t"
-        end
-        if showLogLevel
-            logPrefix = logPrefix * prefix * " "
+        local pid = getpid()
+        local tid = Threads.threadid()
+        for x in ss
+            if showPid && showTid
+                if showLogLevel
+                    @printf("%8d%8d %s %s\n", pid, tid, prefix, x)
+                else
+                    @printf("%8d%8d %s\n", pid, tid, x)
+                end
+            elseif showPid
+                if showLogLevel
+                    @printf("%8d %s %s\n", pid, prefix, x)
+                else
+                    @printf("%8d %s\n", pid, x)
+                end
+            elseif showTid
+                if showLogLevel
+                    @printf("%8d %s %s\n", tid, prefix, x)
+                else
+                    @printf("%8d %s\n", tid, x)
+                end
+            else
+                if showLogLevel
+                    @printf("%s %s\n", prefix, x)
+                else
+                    @printf("%s\n", x)
+                end
+            end
         end
     end
-    p(io, logPrefix, xs...)
 end
 
 # show verbose log
