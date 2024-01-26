@@ -1,6 +1,8 @@
+using Dates
 using Printf
 
 global showPrefix = true
+global showTimestamp = true
 global showPid = true
 global showTid = true
 global showLogLevel = true
@@ -72,36 +74,29 @@ end
 
 function l(io::IO, prefix::AbstractString, xs...)
     local ss = split(join(xs), "\n")
+    fmtStr = ""
+    local args = []
     if showPrefix
-        local pid = getpid()
-        local tid = Threads.threadid()
-        for x in ss
-            if showPid && showTid
-                if showLogLevel
-                    @printf("%8d%8d %s %s\n", pid, tid, prefix, x)
-                else
-                    @printf("%8d%8d %s\n", pid, tid, x)
-                end
-            elseif showPid
-                if showLogLevel
-                    @printf("%8d %s %s\n", pid, prefix, x)
-                else
-                    @printf("%8d %s\n", pid, x)
-                end
-            elseif showTid
-                if showLogLevel
-                    @printf("%8d %s %s\n", tid, prefix, x)
-                else
-                    @printf("%8d %s\n", tid, x)
-                end
-            else
-                if showLogLevel
-                    @printf("%s %s\n", prefix, x)
-                else
-                    @printf("%s\n", x)
-                end
-            end
+        if showTimestamp
+            fmtStr *= "%s "
+            push!(args, Dates.format(now(), "mm-dd HH:MM:SS.sss"))
         end
+        if showPid
+            fmtStr *= "%8d "
+            push!(args, getpid())
+        end
+        if showTid
+            fmtStr *= "%8d "
+            push!(args, Threads.threadid())
+        end
+        if showLogLevel
+            fmtStr *= "%s "
+            push!(args, prefix)
+        end
+    end
+
+    for x in ss
+        print(io, Printf.format(Printf.Format(fmtStr * "%s"), args..., x), "\n")
     end
 end
 
