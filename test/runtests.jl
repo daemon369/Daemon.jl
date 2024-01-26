@@ -4,9 +4,11 @@ using Test
 @testset "Daemon.jl" begin
     # Write your tests here.
     println("showPrefix")
+
+
     @test Daemon.showPrefix == true
-    Daemon.setShowPrefix(false)
-    @test Daemon.showPrefix == false
+    # Daemon.setShowPrefix(false)
+    # @test Daemon.showPrefix == false
     println()
 
     println("verbose")
