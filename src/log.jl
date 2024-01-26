@@ -38,6 +38,14 @@ function setShowPid(s::Bool)
     global showPid = s
 end
 
+function getShowTimestamp()::Bool
+    return showTimestamp
+end
+
+function setShowTimestamp(s::Bool)
+    global showTimestamp = s
+end
+
 function getShowTid()::Bool
     return showTid
 end
